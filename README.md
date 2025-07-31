@@ -1,1 +1,1 @@
-# csei-landing-page
+# medical-college
