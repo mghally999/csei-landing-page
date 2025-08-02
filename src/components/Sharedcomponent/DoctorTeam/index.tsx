@@ -84,7 +84,7 @@ export default function TestimonialsShowcase() {
       comment: "Truly enriching experience",
       description:
         "The college provides a supportive learning environment with knowledgeable faculty dedicated to student growth.",
-      rating: 4,
+      rating: 5,
       techStack: ["AI", "Robotics", "Cloud"],
       accentColor: "#EF4444",
     },

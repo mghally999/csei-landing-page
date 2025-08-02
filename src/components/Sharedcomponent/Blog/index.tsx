@@ -144,7 +144,7 @@ export default function CosmicBrands() {
         </div>
 
         <div className="relative">
-          <button
+          {/* <button
             onClick={() => scroll("left")}
             className="cosmic-nav-button left-0 md:-left-12"
             aria-label="Scroll left"
@@ -162,7 +162,7 @@ export default function CosmicBrands() {
                 d="M15 19l-7-7 7-7"
               />
             </svg>
-          </button>
+          </button> */}
 
           <div ref={scrollRef} className="logos-container cosmic-logos-grid">
             {brands.map((logo, i) => (
@@ -181,7 +181,7 @@ export default function CosmicBrands() {
             ))}
           </div>
 
-          <button
+          {/* <button
             onClick={() => scroll("right")}
             className="cosmic-nav-button right-0 md:-right-12"
             aria-label="Scroll right"
@@ -199,7 +199,7 @@ export default function CosmicBrands() {
                 d="M9 5l7 7-7 7"
               />
             </svg>
-          </button>
+          </button> */}
         </div>
       </div>
 

@@ -46,7 +46,7 @@ const FinancialAid = () => {
     },
     {
       title: "External Sponsorships & Partnerships",
-      icon: "mdi:galaxy",
+      icon: "mdi:star-shooting-outline",
       features: [
         "Apply through government or NGO sponsorship bodies",
         "Corporate/foundation scholarships available by nomination",
