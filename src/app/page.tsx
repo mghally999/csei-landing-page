@@ -17,7 +17,7 @@ export default function Home() {
     <main>
       <Hero />
       <MedicineService />
-      <Service isSpace={true} />
+      <Service />
       <Support />
       <DoctorTeam />
       <Testimonials />

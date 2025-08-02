@@ -4,13 +4,20 @@ import { useEffect, useState } from "react";
 import { getGroupedPrograms } from "@/utils/getGroupedPrograms";
 
 interface Program {
-  id: string;
+  id: number; // Changed from string to number based on the error
   title: string;
-  level?: string;
+  href: string;
+  school: string;
+  category: string;
+  level: string;
+  duration: number; // Changed from optional string to number based on the error
+  imageSrc: string;
+  professional: boolean;
   credentialTitle?: string;
-  professional?: boolean;
+  rating?: number;
+  discountedPrice?: number;
+  popular?: boolean;
 }
-
 interface GroupedPrograms {
   professionalPrograms: Program[];
   regularPrograms: Program[];

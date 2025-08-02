@@ -2,11 +2,7 @@
 
 import React from "react";
 
-interface ServicesProps {
-  isSpace?: boolean;
-}
-
-const Services: React.FC<ServicesProps> = ({ isSpace = true }) => {
+const Services: React.FC = () => {
   const services = [
     {
       title: "General Checkup",
@@ -38,11 +34,7 @@ const Services: React.FC<ServicesProps> = ({ isSpace = true }) => {
   ];
 
   return (
-    <section
-      className={`${
-        isSpace ? "mb-20" : ""
-      } px-4 py-12 bg-gray-50 transition-all duration-300`}
-    >
+    <section className="mb-20 px-4 py-12 bg-gray-50 transition-all duration-300">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
           Our Services

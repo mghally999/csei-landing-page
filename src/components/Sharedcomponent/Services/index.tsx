@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiCompass, FiAward, FiSearch } from "react-icons/fi";
 
 // Type definitions
-type Program = {
+interface Program {
   id: string;
   title: string;
   school: string;
@@ -23,24 +23,24 @@ type Program = {
   discountedPrice?: number;
   popular?: boolean;
   credentialTitle?: string;
-};
+}
 
-type EnhancedProgram = Program & {
+interface EnhancedProgram extends Program {
   professional: boolean;
   duration: string;
   level: string;
   searchText: string;
-};
+}
 
-type ConstellationCourse = EnhancedProgram & {
+interface ConstellationCourse extends EnhancedProgram {
   position: {
     x: number;
     y: number;
     size: number;
   };
-};
+}
 
-type BrandColors = {
+interface BrandColors {
   primary: string;
   secondary: string;
   accent: string;
@@ -48,7 +48,7 @@ type BrandColors = {
   darkText: string;
   border: string;
   highlight: string;
-};
+}
 
 const categories = [
   "Health & Social Care",
@@ -82,14 +82,22 @@ const CourseListOne = () => {
 
   // Enhanced programs data with memoization
   const enhancedPrograms = useMemo((): EnhancedProgram[] => {
-    return programs.map((program) => ({
-      ...program,
-      professional: program.href.includes("/professional-courses/"),
-      duration: program.duration || "Duration not specified",
-      level: program.level || "Level not specified",
-      searchText:
-        `${program.title} ${program.school} ${program.category} ${program.level}`.toLowerCase(),
-    }));
+    return programs.map((program) => {
+      return {
+        id: String(program.id), // ✅ fix type issue
+        title: program.title,
+        href: program.href,
+        school: program.school,
+        category: program.category,
+        level: String(program.level || "Level not specified"),
+        duration: String(program.duration || "Duration not specified"),
+        imageSrc: program.imageSrc,
+        credentialTitle: program.credentialTitle,
+        professional: program.href.includes("/professional-courses/"),
+        searchText:
+          `${program.title} ${program.school} ${program.category} ${program.level}`.toLowerCase(),
+      };
+    });
   }, []);
 
   // State management

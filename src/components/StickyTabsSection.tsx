@@ -77,53 +77,90 @@ export default function StickyTabsSection({ program }: StickyTabsSectionProps) {
     ],
   };
 
+  const fallbackUniversityProgression = {
+    data: [],
+    description: "This qualification supports progression to higher education.",
+  };
+
+  // Define section components with proper typing
   const sections = [
-    { id: 1, Component: Overview, props: { data: program.overview } },
-    { id: 2, Component: WhyCSEI, props: { data: program.whyCSEI } },
+    {
+      id: 1,
+      Component: Overview as React.FC<{ data?: string }>,
+      props: { data: program.overview },
+    },
+    {
+      id: 2,
+      Component: WhyCSEI as React.FC<{ data?: string[] | string }>,
+      props: { data: program.whyCSEI },
+    },
     {
       id: 3,
-      Component: EntryRequirements,
+      Component: EntryRequirements as React.FC<{
+        data: {
+          description?: string;
+          points?: string[];
+        };
+      }>,
       props: {
-        data:
-          program.entryRequirements &&
-          Object.keys(program.entryRequirements).length
-            ? program.entryRequirements
-            : fallbackEntryRequirements,
+        data: program.entryRequirements || fallbackEntryRequirements,
       },
     },
     {
       id: 4,
-      Component: QualificationStructure,
+      Component: QualificationStructure as React.FC<{ data?: string }>,
       props: { data: program.qualificationStructureText },
     },
-    { id: 5, Component: AllUnits, props: { data: program.qualificationUnits } },
+    {
+      id: 5,
+      Component: AllUnits as React.FC<{ data?: string[] | string }>,
+      props: { data: program.qualificationUnits },
+    },
     ...(program.professional
       ? [
           {
             id: 6,
-            Component: CourseObjectives,
+            Component: CourseObjectives as React.FC<{
+              data?: string[] | string;
+            }>,
             props: { data: program.courseObjectives },
           },
         ]
       : []),
     {
       id: 7,
-      Component: AssessmentVerification,
+      Component: AssessmentVerification as React.FC<{ data?: any }>,
       props: { data: program.assessmentVerification },
     },
     {
       id: 8,
-      Component: CareerOpportunities,
+      Component: CareerOpportunities as React.FC<{ data?: string[] | string }>,
       props: { data: program.careerOpportunities },
     },
-    { id: 9, Component: TuitionFees, props: { program } },
+    {
+      id: 9,
+      Component: TuitionFees as React.FC<{ program: ProgramData }>,
+      props: { program },
+    },
     ...(!program.professional
       ? [
-          { id: 10, Component: SampleCertificate, props: {} },
+          {
+            id: 10,
+            Component: SampleCertificate as React.FC<{}>,
+            props: {},
+          },
           {
             id: 11,
-            Component: UniversityProgression,
-            props: { data: [], description: program.universityProgression },
+            Component: UniversityProgression as React.FC<{
+              data?: any[];
+              description?: string;
+            }>,
+            props: {
+              ...fallbackUniversityProgression,
+              ...(typeof program.universityProgression === "string" && {
+                description: program.universityProgression,
+              }),
+            },
           },
         ]
       : []),
@@ -201,7 +238,7 @@ export default function StickyTabsSection({ program }: StickyTabsSectionProps) {
 
         <div className="content">
           {(() => {
-            sectionRefs.current = []; // Reset before assignment
+            sectionRefs.current = [];
             return sections.map(({ id, Component, props }, index) => (
               <div
                 key={id}
@@ -214,7 +251,7 @@ export default function StickyTabsSection({ program }: StickyTabsSectionProps) {
                 data-section-id={id}
                 className="content-section"
               >
-                <Component {...props} />
+                <Component {...(props as any)} />
               </div>
             ));
           })()}
